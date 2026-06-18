@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>박창근 ♥ 정보람 결혼합니다</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: #faf9f7;
+      color: #3a3a3a;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    /* 상단 헤더 */
+    .hero {
+      background: #f0ebe3;
+      text-align: center;
+      padding: 60px 24px 48px;
+      border-bottom: 1px solid #e8e0d4;
+    }
+
+    .hero-date-small {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: #9e8f7e;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .hero-names {
+      font-size: 34px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #3a3a3a;
+      line-height: 1.3;
+    }
+
+    .hero-names span {
+      font-size: 20px;
+      color: #b5937a;
+      margin: 0 10px;
+      font-weight: 400;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: #c4a98a;
+      margin: 28px auto;
+    }
+
+    .hero-date-main {
+      font-size: 15px;
+      color: #6b5e52;
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+    }
+
+    /* 섹션 공통 */
+    section {
+      padding: 44px 28px;
+      border-bottom: 1px solid #ece8e2;
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: #b5937a;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* 인사말 */
+    .greeting-text {
+      font-size: 15px;
+      line-height: 2;
+      color: #5a5046;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    /* 혼주 정보 */
+    .family-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      color: #5a5046;
+    }
+
+    .family-table td {
+      padding: 6px 8px;
+      line-height: 1.7;
+    }
+
+    .family-table .side-label {
+      font-size: 12px;
+      color: #b5937a;
+      letter-spacing: 0.1em;
+      padding-top: 14px;
+      font-weight: 500;
+    }
+
+    .family-table .role {
+      color: #9e8f7e;
+      font-size: 13px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .family-table .name {
+      font-weight: 500;
+      padding-left: 6px;
+    }
+
+    /* 일정 */
+    .date-block {
+      text-align: center;
+    }
+
+    .date-big {
+      font-size: 42px;
+      font-weight: 200;
+      letter-spacing: 0.05em;
+      color: #3a3a3a;
+      line-height: 1;
+    }
+
+    .date-sub {
+      font-size: 14px;
+      color: #9e8f7e;
+      margin-top: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    .date-time {
+      margin-top: 16px;
+      font-size: 16px;
+      color: #6b5e52;
+      letter-spacing: 0.05em;
+    }
+
+    /* D-day 카운터 */
+    .dday {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 20px;
+      background: #f0ebe3;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #9e8f7e;
+      letter-spacing: 0.1em;
+    }
+
+    /* 달력 */
+    .calendar {
+      margin: 28px auto 0;
+      max-width: 280px;
+    }
+
+    .cal-header {
+      text-align: center;
+      font-size: 13px;
+      color: #9e8f7e;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      text-align: center;
+    }
+
+    .cal-day-name {
+      font-size: 11px;
+      color: #b5937a;
+      padding: 4px 0;
+      letter-spacing: 0.05em;
+    }
+
+    .cal-day-name.sun { color: #d4846a; }
+    .cal-day-name.sat { color: #7a9ab8; }
+
+    .cal-cell {
+      font-size: 13px;
+      color: #6b5e52;
+      padding: 6px 2px;
+      border-radius: 50%;
+    }
+
+    .cal-cell.empty { color: transparent; }
+    .cal-cell.sun { color: #d4846a; }
+    .cal-cell.sat { color: #7a9ab8; }
+
+    .cal-cell.today {
+      background: #b5937a;
+      color: #fff !important;
+      font-weight: 600;
+      border-radius: 50%;
+    }
+
+    /* 장소 */
+    .venue-name {
+      font-size: 18px;
+      font-weight: 500;
+      color: #3a3a3a;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .venue-hall {
+      font-size: 14px;
+      color: #9e8f7e;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .venue-address {
+      font-size: 13px;
+      color: #7a6e65;
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    .map-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: opacity 0.15s;
+    }
+
+    .map-btn:active { opacity: 0.7; }
+
+    .map-btn.kakao {
+      background: #FEE500;
+      color: #3c1e1e;
+    }
+
+    .map-btn.naver {
+      background: #03C75A;
+      color: #fff;
+    }
+
+    .map-btn.google {
+      background: #4285F4;
+      color: #fff;
+    }
+
+    /* 오시는 길 */
+    .transport-block {
+      margin-top: 28px;
+    }
+
+    .transport-item {
+      margin-bottom: 20px;
+    }
+
+    .transport-title {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: #b5937a;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .transport-content {
+      font-size: 13px;
+      color: #6b5e52;
+      line-height: 1.8;
+    }
+
+    /* 계좌번호 */
+    .account-block {
+      margin-bottom: 24px;
+    }
+
+    .account-side {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: #b5937a;
+      margin-bottom: 10px;
+    }
+
+    .account-card {
+      background: #f7f4f0;
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .account-info {
+      font-size: 14px;
+      color: #5a5046;
+      line-height: 1.6;
+    }
+
+    .account-info .bank {
+      font-size: 12px;
+      color: #9e8f7e;
+    }
+
+    .copy-btn {
+      background: #e8e0d4;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-size: 12px;
+      color: #6b5e52;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      transition: background 0.15s;
+    }
+
+    .copy-btn:active {
+      background: #b5937a;
+      color: #fff;
+    }
+
+    /* 푸터 */
+    footer {
+      text-align: center;
+      padding: 36px 24px 48px;
+      background: #f0ebe3;
+      font-size: 12px;
+      color: #b5937a;
+      letter-spacing: 0.08em;
+      line-height: 2;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(58, 58, 58, 0.88);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 24px;
+      font-size: 13px;
+      opacity: 0;
+      transition: all 0.25s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <div class="hero">
+    <div class="hero-date-small">2026 · 08 · 23</div>
+    <div class="hero-names">
+      박창근 <span>♥</span> 정보람
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-date-main">
+      2026년 8월 23일 일요일<br>
+      오후 4시 40분<br>
+      여의도웨딩컨벤션 3F 그랜드볼룸
+    </div>
+  </div>
+
+  <!-- 인사말 -->
+  <section>
+    <div class="section-label">Invitation</div>
+    <p class="greeting-text">
+      서로를 아끼고 의지하며<br>
+      한마음으로 살아가고자 합니다.<br><br>
+      소중한 걸음으로 함께해 주시어<br>
+      저희의 새로운 시작을 축복해 주신다면<br>
+      더없는 기쁨으로 간직하겠습니다.
+    </p>
+  </section>
+
+  <!-- 혼주 -->
+  <section>
+    <div class="section-label">Family</div>
+    <table class="family-table">
+      <tr>
+        <td colspan="3" class="side-label">신랑 측</td>
+      </tr>
+      <tr>
+        <td class="role">아버지</td>
+        <td class="name">박재영</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="role">어머니</td>
+        <td class="name">유용미</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="role">장남</td>
+        <td class="name">박창근</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="side-label">신부 측</td>
+      </tr>
+      <tr>
+        <td class="role">아버지</td>
+        <td class="name">정희준</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="role">어머니</td>
+        <td class="name">권남희</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="role">장녀</td>
+        <td class="name">정보람</td>
+        <td></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 날짜 / 달력 -->
+  <section>
+    <div class="section-label">Date</div>
+    <div class="date-block">
+      <div class="date-big">08.23</div>
+      <div class="date-sub">2026 · SUNDAY</div>
+      <div class="date-time">오후 4시 40분</div>
+      <div class="dday" id="dday-text">D-day 계산 중...</div>
+
+      <div class="calendar">
+        <div class="cal-header">2026년 8월</div>
+        <div class="cal-grid">
+          <div class="cal-day-name sun">일</div>
+          <div class="cal-day-name">월</div>
+          <div class="cal-day-name">화</div>
+          <div class="cal-day-name">수</div>
+          <div class="cal-day-name">목</div>
+          <div class="cal-day-name">금</div>
+          <div class="cal-day-name sat">토</div>
+
+          <!-- 1일: 토요일(6번째) -->
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell sat">1</div>
+
+          <div class="cal-cell sun">2</div>
+          <div class="cal-cell">3</div>
+          <div class="cal-cell">4</div>
+          <div class="cal-cell">5</div>
+          <div class="cal-cell">6</div>
+          <div class="cal-cell">7</div>
+          <div class="cal-cell sat">8</div>
+
+          <div class="cal-cell sun">9</div>
+          <div class="cal-cell">10</div>
+          <div class="cal-cell">11</div>
+          <div class="cal-cell">12</div>
+          <div class="cal-cell">13</div>
+          <div class="cal-cell">14</div>
+          <div class="cal-cell sat">15</div>
+
+          <div class="cal-cell sun">16</div>
+          <div class="cal-cell">17</div>
+          <div class="cal-cell">18</div>
+          <div class="cal-cell">19</div>
+          <div class="cal-cell">20</div>
+          <div class="cal-cell">21</div>
+          <div class="cal-cell sat">22</div>
+
+          <div class="cal-cell today">23</div>
+          <div class="cal-cell">24</div>
+          <div class="cal-cell">25</div>
+          <div class="cal-cell">26</div>
+          <div class="cal-cell">27</div>
+          <div class="cal-cell">28</div>
+          <div class="cal-cell sat">29</div>
+
+          <div class="cal-cell sun">30</div>
+          <div class="cal-cell">31</div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 장소 -->
+  <section>
+    <div class="section-label">Location</div>
+    <div class="venue-name">여의도웨딩컨벤션</div>
+    <div class="venue-hall">3F 그랜드볼룸</div>
+    <div class="venue-address">
+      서울특별시 영등포구 여의대로 14<br>
+      KT빌딩
+    </div>
+
+    <div class="map-buttons">
+      <a class="map-btn kakao"
+        href="https://map.kakao.com/link/search/여의도웨딩컨벤션"
+        target="_blank">카카오맵</a>
+      <a class="map-btn naver"
+        href="https://map.naver.com/v5/search/여의도웨딩컨벤션"
+        target="_blank">네이버지도</a>
+      <a class="map-btn google"
+        href="https://maps.google.com/maps?q=여의도웨딩컨벤션"
+        target="_blank">구글맵</a>
+    </div>
+
+    <div class="transport-block">
+      <div class="transport-item">
+        <div class="transport-title">지하철</div>
+        <div class="transport-content">
+          5호선 여의도역 3번 출구<br>
+          9호선 여의도역 3번 출구
+        </div>
+      </div>
+      <div class="transport-item">
+        <div class="transport-title">버스</div>
+        <div class="transport-content">
+          여의도 KT 앞 정류장 하차
+        </div>
+      </div>
+      <div class="transport-item">
+        <div class="transport-title">주차</div>
+        <div class="transport-content">
+          KT빌딩 지하주차장 이용 가능
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마음 전하기 (계좌) -->
+  <section>
+    <div class="section-label">Gift</div>
+
+    <div class="account-block">
+      <div class="account-side">신랑 측</div>
+      <div class="account-card">
+        <div class="account-info">
+          <div class="bank">KB국민은행</div>
+          <div>774601-04-164893</div>
+          <div>박창근</div>
+        </div>
+        <button class="copy-btn" onclick="copyAccount('774601-04-164893')">복사</button>
+      </div>
+    </div>
+
+    <div class="account-block">
+      <div class="account-side">신부 측</div>
+      <div class="account-card">
+        <div class="account-info">
+          <div class="bank">KB국민은행</div>
+          <div>384902-04-065495</div>
+          <div>정보람</div>
+        </div>
+        <button class="copy-btn" onclick="copyAccount('384902-04-065495')">복사</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer>
+    박창근 · 정보람<br>
+    2026년 8월 23일
+  </footer>
+
+  <!-- 토스트 -->
+  <div class="toast" id="toast">계좌번호를 복사했습니다</div>
+
+  <script>
+    // D-day 계산
+    (function () {
+      const wedding = new Date('2026-08-23T16:40:00+09:00');
+      const now = new Date();
+      const diff = Math.ceil((wedding - now) / (1000 * 60 * 60 * 24));
+      const el = document.getElementById('dday-text');
+      if (diff > 0) el.textContent = 'D-' + diff;
+      else if (diff === 0) el.textContent = 'D-Day';
+      else el.textContent = 'D+' + Math.abs(diff);
+    })();
+
+    // 계좌번호 복사
+    function copyAccount(num) {
+      const clean = num.replace(/-/g, '');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(clean).then(showToast);
+      } else {
+        const t = document.createElement('textarea');
+        t.value = clean;
+        document.body.appendChild(t);
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        showToast();
+      }
+    }
+
+    function showToast() {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+  </script>
+</body>
+</html>
