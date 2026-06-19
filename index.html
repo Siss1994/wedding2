@@ -28,9 +28,9 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('https://changgeun-boram-20260823.wedding-card.pics/og-image.jpg');
+      background-image: url('images/flower-2.jpg');
       background-size: cover;
-      background-position: center 30%;
+      background-position: center 40%;
       transform: scale(1.04);
       transition: transform 8s ease-out;
     }
@@ -660,24 +660,9 @@
     <div class="banner-overlay"></div>
   </div>
 
-  <!-- 갤러리 -->
-  <div class="gallery-section">
-    <div class="section-label">Gallery</div>
-    <div class="gallery-track" id="galleryTrack">
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/01.jpg" alt="사진 1" loading="lazy" onclick="openLb(this)" /></div>
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/02.jpg" alt="사진 2" loading="lazy" onclick="openLb(this)" /></div>
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/03.jpg" alt="사진 3" loading="lazy" onclick="openLb(this)" /></div>
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/04.jpg" alt="사진 4" loading="lazy" onclick="openLb(this)" /></div>
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/05.jpg" alt="사진 5" loading="lazy" onclick="openLb(this)" /></div>
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/06.jpg" alt="사진 6" loading="lazy" onclick="openLb(this)" /></div>
-      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/07.jpg" alt="사진 7" loading="lazy" onclick="openLb(this)" /></div>
-    </div>
-    <div class="gallery-hint">← 옆으로 밀어보세요 →</div>
-  </div>
-
-  <!-- 배너: 웨딩 아치 -->
+  <!-- 배너: 그린 -->
   <div class="img-banner tall">
-    <img src="images/arch.jpg" alt="" loading="lazy" style="object-position: center top;" />
+    <img src="images/green-1.jpg" alt="" loading="lazy" />
     <div class="banner-overlay"></div>
   </div>
 
@@ -752,12 +737,6 @@
     </div>
   </footer>
 
-  <!-- 라이트박스 -->
-  <div class="lightbox" id="lightbox" onclick="closeLb()">
-    <span class="lb-close" onclick="closeLb()">✕</span>
-    <img id="lbImg" src="" alt="" />
-  </div>
-
   <!-- 토스트 -->
   <div class="toast" id="toast">계좌번호를 복사했습니다</div>
 
@@ -766,7 +745,7 @@
     const heroBg = document.getElementById('heroBg');
     const img = new Image();
     img.onload = () => heroBg.classList.add('loaded');
-    img.src = 'https://changgeun-boram-20260823.wedding-card.pics/og-image.jpg';
+    img.src = 'images/flower-2.jpg';
 
     // D-day
     (function () {
@@ -798,17 +777,6 @@
       setTimeout(() => t.classList.remove('show'), 2000);
     }
 
-    // 라이트박스
-    function openLb(imgEl) {
-      document.getElementById('lbImg').src = imgEl.src;
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLb() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
-    }
   </script>
 </body>
 </html>
