@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>박창근 ♥ 정보람 결혼합니다</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
@@ -20,80 +16,148 @@
       min-height: 100vh;
     }
 
-    /* 상단 헤더 */
+    /* ── 히어로 커버 ── */
     .hero {
-      background: #f0ebe3;
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      min-height: 580px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://changgeun-boram-20260823.wedding-card.pics/og-image.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.08) 0%,
+        rgba(0,0,0,0.20) 50%,
+        rgba(0,0,0,0.55) 100%
+      );
+    }
+
+    .hero-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0 28px 52px;
       text-align: center;
-      padding: 60px 24px 48px;
-      border-bottom: 1px solid #e8e0d4;
+      color: #fff;
     }
 
     .hero-date-small {
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      color: #9e8f7e;
-      margin-bottom: 28px;
-      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
     }
 
     .hero-names {
-      font-size: 34px;
+      font-size: 36px;
       font-weight: 300;
-      letter-spacing: 0.08em;
-      color: #3a3a3a;
-      line-height: 1.3;
+      letter-spacing: 0.1em;
+      line-height: 1.25;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.3);
     }
 
-    .hero-names span {
-      font-size: 20px;
-      color: #b5937a;
+    .hero-names .heart {
+      font-size: 18px;
+      color: rgba(255,220,200,0.9);
       margin: 0 10px;
-      font-weight: 400;
+      vertical-align: middle;
     }
 
     .hero-divider {
-      width: 40px;
+      width: 32px;
       height: 1px;
-      background: #c4a98a;
-      margin: 28px auto;
+      background: rgba(255,255,255,0.55);
+      margin: 18px auto;
     }
 
-    .hero-date-main {
-      font-size: 15px;
-      color: #6b5e52;
-      line-height: 1.8;
-      letter-spacing: 0.05em;
+    .hero-info {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.9;
+      letter-spacing: 0.04em;
     }
 
-    /* 섹션 공통 */
+    .hero-scroll {
+      margin-top: 24px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.5);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ── 섹션 공통 ── */
     section {
-      padding: 44px 28px;
+      padding: 48px 28px;
       border-bottom: 1px solid #ece8e2;
-    }
-
-    section:last-child {
-      border-bottom: none;
     }
 
     .section-label {
       font-size: 11px;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.28em;
       color: #b5937a;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       text-align: center;
     }
 
-    /* 인사말 */
+    /* ── 인사말 (배경 이미지) ── */
+    .greeting-section {
+      position: relative;
+      padding: 72px 28px;
+      text-align: center;
+      overflow: hidden;
+      border-bottom: 1px solid #ece8e2;
+    }
+
+    .greeting-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://changgeun-boram-20260823.wedding-card.pics/msg-bg.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .greeting-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(250, 247, 242, 0.88);
+    }
+
+    .greeting-inner {
+      position: relative;
+      z-index: 1;
+    }
+
     .greeting-text {
       font-size: 15px;
-      line-height: 2;
+      line-height: 2.1;
       color: #5a5046;
-      text-align: center;
       word-break: keep-all;
     }
 
-    /* 혼주 정보 */
+    /* ── 혼주 ── */
     .family-table {
       width: 100%;
       border-collapse: collapse;
@@ -101,17 +165,15 @@
       color: #5a5046;
     }
 
-    .family-table td {
-      padding: 6px 8px;
-      line-height: 1.7;
-    }
+    .family-table td { padding: 5px 8px; line-height: 1.7; }
 
     .family-table .side-label {
-      font-size: 12px;
+      font-size: 11px;
       color: #b5937a;
-      letter-spacing: 0.1em;
-      padding-top: 14px;
-      font-weight: 500;
+      letter-spacing: 0.12em;
+      padding-top: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
     }
 
     .family-table .role {
@@ -121,43 +183,36 @@
       white-space: nowrap;
     }
 
-    .family-table .name {
-      font-weight: 500;
-      padding-left: 6px;
-    }
+    .family-table .name { font-weight: 500; padding-left: 8px; }
 
-    /* 일정 */
-    .date-block {
-      text-align: center;
-    }
+    /* ── 날짜 ── */
+    .date-block { text-align: center; }
 
     .date-big {
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 200;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: #3a3a3a;
-      line-height: 1;
     }
 
     .date-sub {
-      font-size: 14px;
+      font-size: 13px;
       color: #9e8f7e;
-      margin-top: 10px;
-      letter-spacing: 0.08em;
+      margin-top: 8px;
+      letter-spacing: 0.1em;
     }
 
     .date-time {
-      margin-top: 16px;
+      margin-top: 14px;
       font-size: 16px;
       color: #6b5e52;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
-    /* D-day 카운터 */
     .dday {
       display: inline-block;
-      margin-top: 20px;
-      padding: 8px 20px;
+      margin-top: 18px;
+      padding: 7px 20px;
       background: #f0ebe3;
       border-radius: 20px;
       font-size: 13px;
@@ -166,10 +221,7 @@
     }
 
     /* 달력 */
-    .calendar {
-      margin: 28px auto 0;
-      max-width: 280px;
-    }
+    .calendar { margin: 28px auto 0; max-width: 270px; }
 
     .cal-header {
       text-align: center;
@@ -190,7 +242,6 @@
       font-size: 11px;
       color: #b5937a;
       padding: 4px 0;
-      letter-spacing: 0.05em;
     }
 
     .cal-day-name.sun { color: #d4846a; }
@@ -200,7 +251,6 @@
       font-size: 13px;
       color: #6b5e52;
       padding: 6px 2px;
-      border-radius: 50%;
     }
 
     .cal-cell.empty { color: transparent; }
@@ -214,28 +264,77 @@
       border-radius: 50%;
     }
 
-    /* 장소 */
+    /* ── 갤러리 ── */
+    .gallery-section {
+      padding: 48px 0;
+      border-bottom: 1px solid #ece8e2;
+    }
+
+    .gallery-section .section-label { padding: 0 28px; }
+
+    .gallery-track {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 0 28px 4px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .gallery-track::-webkit-scrollbar { display: none; }
+
+    .gallery-item {
+      flex: 0 0 calc(50% - 3px);
+      scroll-snap-align: start;
+      aspect-ratio: 3/4;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f0ebe3;
+    }
+
+    .gallery-item:first-child { flex: 0 0 80%; aspect-ratio: 4/5; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item img:hover { transform: scale(1.03); }
+
+    .gallery-hint {
+      text-align: center;
+      font-size: 11px;
+      color: #c4b8aa;
+      letter-spacing: 0.1em;
+      margin-top: 14px;
+      padding: 0 28px;
+    }
+
+    /* ── 장소 ── */
     .venue-name {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 500;
       color: #3a3a3a;
       text-align: center;
-      line-height: 1.5;
     }
 
     .venue-hall {
       font-size: 14px;
       color: #9e8f7e;
       text-align: center;
-      margin-top: 6px;
+      margin-top: 5px;
     }
 
     .venue-address {
       font-size: 13px;
       color: #7a6e65;
       text-align: center;
-      margin-top: 16px;
-      line-height: 1.7;
+      margin-top: 14px;
+      line-height: 1.8;
     }
 
     .map-buttons {
@@ -248,7 +347,6 @@
     .map-btn {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
       padding: 9px 16px;
       border-radius: 8px;
       font-size: 13px;
@@ -259,36 +357,19 @@
     }
 
     .map-btn:active { opacity: 0.7; }
+    .map-btn.kakao { background: #FEE500; color: #3c1e1e; }
+    .map-btn.naver { background: #03C75A; color: #fff; }
+    .map-btn.google { background: #4285F4; color: #fff; }
 
-    .map-btn.kakao {
-      background: #FEE500;
-      color: #3c1e1e;
-    }
+    .transport-block { margin-top: 28px; }
 
-    .map-btn.naver {
-      background: #03C75A;
-      color: #fff;
-    }
-
-    .map-btn.google {
-      background: #4285F4;
-      color: #fff;
-    }
-
-    /* 오시는 길 */
-    .transport-block {
-      margin-top: 28px;
-    }
-
-    .transport-item {
-      margin-bottom: 20px;
-    }
+    .transport-item { margin-bottom: 18px; }
 
     .transport-title {
-      font-size: 12px;
-      letter-spacing: 0.15em;
+      font-size: 11px;
+      letter-spacing: 0.18em;
       color: #b5937a;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-transform: uppercase;
     }
 
@@ -298,16 +379,15 @@
       line-height: 1.8;
     }
 
-    /* 계좌번호 */
-    .account-block {
-      margin-bottom: 24px;
-    }
+    /* ── 계좌 ── */
+    .account-block { margin-bottom: 22px; }
 
     .account-side {
-      font-size: 12px;
-      letter-spacing: 0.12em;
+      font-size: 11px;
+      letter-spacing: 0.14em;
       color: #b5937a;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .account-card {
@@ -334,7 +414,7 @@
       background: #e8e0d4;
       border: none;
       border-radius: 6px;
-      padding: 7px 12px;
+      padding: 7px 13px;
       font-size: 12px;
       color: #6b5e52;
       cursor: pointer;
@@ -343,28 +423,51 @@
       transition: background 0.15s;
     }
 
-    .copy-btn:active {
-      background: #b5937a;
-      color: #fff;
-    }
+    .copy-btn:active { background: #b5937a; color: #fff; }
 
-    /* 푸터 */
+    /* ── 푸터 ── */
     footer {
+      position: relative;
       text-align: center;
-      padding: 36px 24px 48px;
-      background: #f0ebe3;
-      font-size: 12px;
-      color: #b5937a;
-      letter-spacing: 0.08em;
-      line-height: 2;
+      padding: 52px 24px 60px;
+      overflow: hidden;
     }
 
+    .footer-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://changgeun-boram-20260823.wedding-card.pics/gallery/07.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.38);
+    }
+
+    .footer-inner {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .footer-names {
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .footer-date {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ── 토스트 ── */
     .toast {
       position: fixed;
       bottom: 28px;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: rgba(58, 58, 58, 0.88);
+      background: rgba(40,40,40,0.9);
       color: #fff;
       padding: 10px 22px;
       border-radius: 24px;
@@ -376,84 +479,94 @@
       z-index: 1000;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── 라이트박스 ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 96vw;
+      max-height: 92dvh;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 28px;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      line-height: 1;
+      user-select: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- 헤더 -->
+  <!-- 히어로 커버 -->
   <div class="hero">
-    <div class="hero-date-small">2026 · 08 · 23</div>
-    <div class="hero-names">
-      박창근 <span>♥</span> 정보람
-    </div>
-    <div class="hero-divider"></div>
-    <div class="hero-date-main">
-      2026년 8월 23일 일요일<br>
-      오후 4시 40분<br>
-      여의도웨딩컨벤션 3F 그랜드볼룸
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-date-small">2026 · 08 · 23 · SUNDAY</div>
+      <div class="hero-names">
+        박창근 <span class="heart">♥</span> 정보람
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-info">
+        2026년 8월 23일 일요일<br>
+        오후 4시 40분<br>
+        여의도웨딩컨벤션 3F 그랜드볼룸
+      </div>
+      <div class="hero-scroll">▼ scroll</div>
     </div>
   </div>
 
   <!-- 인사말 -->
-  <section>
-    <div class="section-label">Invitation</div>
-    <p class="greeting-text">
-      서로를 아끼고 의지하며<br>
-      한마음으로 살아가고자 합니다.<br><br>
-      소중한 걸음으로 함께해 주시어<br>
-      저희의 새로운 시작을 축복해 주신다면<br>
-      더없는 기쁨으로 간직하겠습니다.
-    </p>
-  </section>
+  <div class="greeting-section">
+    <div class="greeting-bg"></div>
+    <div class="greeting-overlay"></div>
+    <div class="greeting-inner">
+      <div class="section-label">Invitation</div>
+      <p class="greeting-text">
+        서로를 아끼고 의지하며<br>
+        한마음으로 살아가고자 합니다.<br><br>
+        소중한 걸음으로 함께해 주시어<br>
+        저희의 새로운 시작을 축복해 주신다면<br>
+        더없는 기쁨으로 간직하겠습니다.
+      </p>
+    </div>
+  </div>
 
   <!-- 혼주 -->
   <section>
     <div class="section-label">Family</div>
     <table class="family-table">
-      <tr>
-        <td colspan="3" class="side-label">신랑 측</td>
-      </tr>
-      <tr>
-        <td class="role">아버지</td>
-        <td class="name">박재영</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="role">어머니</td>
-        <td class="name">유용미</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="role">장남</td>
-        <td class="name">박창근</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td colspan="3" class="side-label">신부 측</td>
-      </tr>
-      <tr>
-        <td class="role">아버지</td>
-        <td class="name">정희준</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="role">어머니</td>
-        <td class="name">권남희</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td class="role">장녀</td>
-        <td class="name">정보람</td>
-        <td></td>
-      </tr>
+      <tr><td colspan="2" class="side-label">신랑 측</td></tr>
+      <tr><td class="role">아버지</td><td class="name">박재영</td></tr>
+      <tr><td class="role">어머니</td><td class="name">유용미</td></tr>
+      <tr><td class="role">장남</td><td class="name">박창근</td></tr>
+      <tr><td colspan="2" class="side-label">신부 측</td></tr>
+      <tr><td class="role">아버지</td><td class="name">정희준</td></tr>
+      <tr><td class="role">어머니</td><td class="name">권남희</td></tr>
+      <tr><td class="role">장녀</td><td class="name">정보람</td></tr>
     </table>
   </section>
 
-  <!-- 날짜 / 달력 -->
+  <!-- 날짜 달력 -->
   <section>
     <div class="section-label">Date</div>
     <div class="date-block">
@@ -461,7 +574,6 @@
       <div class="date-sub">2026 · SUNDAY</div>
       <div class="date-time">오후 4시 40분</div>
       <div class="dday" id="dday-text">D-day 계산 중...</div>
-
       <div class="calendar">
         <div class="cal-header">2026년 8월</div>
         <div class="cal-grid">
@@ -473,58 +585,54 @@
           <div class="cal-day-name">금</div>
           <div class="cal-day-name sat">토</div>
 
-          <!-- 1일: 토요일(6번째) -->
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div><div class="cal-cell empty"></div>
           <div class="cal-cell sat">1</div>
 
-          <div class="cal-cell sun">2</div>
-          <div class="cal-cell">3</div>
-          <div class="cal-cell">4</div>
-          <div class="cal-cell">5</div>
-          <div class="cal-cell">6</div>
-          <div class="cal-cell">7</div>
+          <div class="cal-cell sun">2</div><div class="cal-cell">3</div>
+          <div class="cal-cell">4</div><div class="cal-cell">5</div>
+          <div class="cal-cell">6</div><div class="cal-cell">7</div>
           <div class="cal-cell sat">8</div>
 
-          <div class="cal-cell sun">9</div>
-          <div class="cal-cell">10</div>
-          <div class="cal-cell">11</div>
-          <div class="cal-cell">12</div>
-          <div class="cal-cell">13</div>
-          <div class="cal-cell">14</div>
+          <div class="cal-cell sun">9</div><div class="cal-cell">10</div>
+          <div class="cal-cell">11</div><div class="cal-cell">12</div>
+          <div class="cal-cell">13</div><div class="cal-cell">14</div>
           <div class="cal-cell sat">15</div>
 
-          <div class="cal-cell sun">16</div>
-          <div class="cal-cell">17</div>
-          <div class="cal-cell">18</div>
-          <div class="cal-cell">19</div>
-          <div class="cal-cell">20</div>
-          <div class="cal-cell">21</div>
+          <div class="cal-cell sun">16</div><div class="cal-cell">17</div>
+          <div class="cal-cell">18</div><div class="cal-cell">19</div>
+          <div class="cal-cell">20</div><div class="cal-cell">21</div>
           <div class="cal-cell sat">22</div>
 
-          <div class="cal-cell today">23</div>
-          <div class="cal-cell">24</div>
-          <div class="cal-cell">25</div>
-          <div class="cal-cell">26</div>
-          <div class="cal-cell">27</div>
-          <div class="cal-cell">28</div>
+          <div class="cal-cell today">23</div><div class="cal-cell">24</div>
+          <div class="cal-cell">25</div><div class="cal-cell">26</div>
+          <div class="cal-cell">27</div><div class="cal-cell">28</div>
           <div class="cal-cell sat">29</div>
 
-          <div class="cal-cell sun">30</div>
-          <div class="cal-cell">31</div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
+          <div class="cal-cell sun">30</div><div class="cal-cell">31</div>
+          <div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div><div class="cal-cell empty"></div>
           <div class="cal-cell empty"></div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- 갤러리 -->
+  <div class="gallery-section">
+    <div class="section-label">Gallery</div>
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/01.jpg" alt="사진 1" loading="lazy" onclick="openLb(this)" /></div>
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/02.jpg" alt="사진 2" loading="lazy" onclick="openLb(this)" /></div>
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/03.jpg" alt="사진 3" loading="lazy" onclick="openLb(this)" /></div>
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/04.jpg" alt="사진 4" loading="lazy" onclick="openLb(this)" /></div>
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/05.jpg" alt="사진 5" loading="lazy" onclick="openLb(this)" /></div>
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/06.jpg" alt="사진 6" loading="lazy" onclick="openLb(this)" /></div>
+      <div class="gallery-item"><img src="https://changgeun-boram-20260823.wedding-card.pics/gallery/07.jpg" alt="사진 7" loading="lazy" onclick="openLb(this)" /></div>
+    </div>
+    <div class="gallery-hint">← 옆으로 밀어보세요 →</div>
+  </div>
 
   <!-- 장소 -->
   <section>
@@ -532,49 +640,32 @@
     <div class="venue-name">여의도웨딩컨벤션</div>
     <div class="venue-hall">3F 그랜드볼룸</div>
     <div class="venue-address">
-      서울특별시 영등포구 여의대로 14<br>
-      KT빌딩
+      서울특별시 영등포구 여의대로 14<br>KT빌딩
     </div>
-
     <div class="map-buttons">
-      <a class="map-btn kakao"
-        href="https://map.kakao.com/link/search/여의도웨딩컨벤션"
-        target="_blank">카카오맵</a>
-      <a class="map-btn naver"
-        href="https://map.naver.com/v5/search/여의도웨딩컨벤션"
-        target="_blank">네이버지도</a>
-      <a class="map-btn google"
-        href="https://maps.google.com/maps?q=여의도웨딩컨벤션"
-        target="_blank">구글맵</a>
+      <a class="map-btn kakao" href="https://map.kakao.com/link/search/여의도웨딩컨벤션" target="_blank">카카오맵</a>
+      <a class="map-btn naver" href="https://map.naver.com/v5/search/여의도웨딩컨벤션" target="_blank">네이버지도</a>
+      <a class="map-btn google" href="https://maps.google.com/maps?q=여의도웨딩컨벤션" target="_blank">구글맵</a>
     </div>
-
     <div class="transport-block">
       <div class="transport-item">
         <div class="transport-title">지하철</div>
-        <div class="transport-content">
-          5호선 여의도역 3번 출구<br>
-          9호선 여의도역 3번 출구
-        </div>
+        <div class="transport-content">5호선 · 9호선 여의도역 3번 출구</div>
       </div>
       <div class="transport-item">
         <div class="transport-title">버스</div>
-        <div class="transport-content">
-          여의도 KT 앞 정류장 하차
-        </div>
+        <div class="transport-content">여의도 KT 앞 정류장 하차</div>
       </div>
       <div class="transport-item">
         <div class="transport-title">주차</div>
-        <div class="transport-content">
-          KT빌딩 지하주차장 이용 가능
-        </div>
+        <div class="transport-content">KT빌딩 지하주차장 이용 가능</div>
       </div>
     </div>
   </section>
 
-  <!-- 마음 전하기 (계좌) -->
+  <!-- 계좌 -->
   <section>
     <div class="section-label">Gift</div>
-
     <div class="account-block">
       <div class="account-side">신랑 측</div>
       <div class="account-card">
@@ -586,7 +677,6 @@
         <button class="copy-btn" onclick="copyAccount('774601-04-164893')">복사</button>
       </div>
     </div>
-
     <div class="account-block">
       <div class="account-side">신부 측</div>
       <div class="account-card">
@@ -602,26 +692,38 @@
 
   <!-- 푸터 -->
   <footer>
-    박창근 · 정보람<br>
-    2026년 8월 23일
+    <div class="footer-bg"></div>
+    <div class="footer-inner">
+      <div class="footer-names">박창근 · 정보람</div>
+      <div class="footer-date">2026. 08. 23</div>
+    </div>
   </footer>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox" id="lightbox" onclick="closeLb()">
+    <span class="lb-close" onclick="closeLb()">✕</span>
+    <img id="lbImg" src="" alt="" />
+  </div>
 
   <!-- 토스트 -->
   <div class="toast" id="toast">계좌번호를 복사했습니다</div>
 
   <script>
-    // D-day 계산
+    // 히어로 이미지 로드 후 줌 애니메이션
+    const heroBg = document.getElementById('heroBg');
+    const img = new Image();
+    img.onload = () => heroBg.classList.add('loaded');
+    img.src = 'https://changgeun-boram-20260823.wedding-card.pics/og-image.jpg';
+
+    // D-day
     (function () {
       const wedding = new Date('2026-08-23T16:40:00+09:00');
-      const now = new Date();
-      const diff = Math.ceil((wedding - now) / (1000 * 60 * 60 * 24));
+      const diff = Math.ceil((wedding - new Date()) / 864e5);
       const el = document.getElementById('dday-text');
-      if (diff > 0) el.textContent = 'D-' + diff;
-      else if (diff === 0) el.textContent = 'D-Day';
-      else el.textContent = 'D+' + Math.abs(diff);
+      el.textContent = diff > 0 ? 'D-' + diff : diff === 0 ? 'D-Day' : 'D+' + Math.abs(diff);
     })();
 
-    // 계좌번호 복사
+    // 계좌 복사
     function copyAccount(num) {
       const clean = num.replace(/-/g, '');
       if (navigator.clipboard) {
@@ -641,6 +743,18 @@
       const t = document.getElementById('toast');
       t.classList.add('show');
       setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    // 라이트박스
+    function openLb(imgEl) {
+      document.getElementById('lbImg').src = imgEl.src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
     }
   </script>
 </body>
